@@ -1,0 +1,21 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 10% 90%;
+}
+
+.card {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+  min-width: 280px;
+
+  border: 6px solid #999;
+  border-radius: 12px;
+  background: #555;
+  flex-direction: column;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+  color: white;
+}
