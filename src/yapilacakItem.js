@@ -1,6 +1,5 @@
 import "./aytem.css";
 import React, { useState } from "react";
-import Ekle from "./ekleme";
 
 function Aytem(props) {
   const tVeri = props.veri;
@@ -58,12 +57,7 @@ function tarih(gelen) {
 function Tarihler(props) {
   const trhList = tarih(props.veri);
   // const gunlukYapilcak = props.yapilcaklar;
-  return (
-    <div>
-      <Ekle vtb={props.veri} />
-      {trhList}
-    </div>
-  );
+  return <div>{trhList}</div>;
 }
 
 export { Aytem, Tarihler };

@@ -4,16 +4,23 @@
   display: grid;
   grid-template-columns: 10% 90%;
 }
-
+.tarih {
+  background-color: yellow;
+  height: 98vh;
+  position: sticky;
+  top: 0;
+  border: 2px solid #fc0;
+  border-radius: 12px;
+}
 .card {
   display: flex;
-  justify-content: space-between;
   padding: 8px;
   min-width: 280px;
-
+  
   border: 6px solid #999;
   border-radius: 12px;
   background: #555;
+  flex-shrink: 0;
   flex-direction: column;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: bold;
