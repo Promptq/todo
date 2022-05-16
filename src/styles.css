@@ -2,21 +2,21 @@
   font-family: sans-serif;
   text-align: center;
   display: grid;
-  grid-template-columns: 10% 90%;
+  grid-template-rows: auto auto;
 }
 .tarih {
   background-color: yellow;
-  height: 98vh;
+  
   position: sticky;
   top: 0;
   border: 2px solid #fc0;
-  border-radius: 12px;
+  border-radius: 0px 0px 12px 12px;
 }
 .card {
   display: flex;
   padding: 8px;
   min-width: 280px;
-  
+  height: fit-content;
   border: 6px solid #999;
   border-radius: 12px;
   background: #555;

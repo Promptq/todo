@@ -1,36 +1,43 @@
-
-function Ekle(props) {
-  const date=new Date();
+import { useState } from "react";
+import "./ekle.css";
+function Ekle({veri,kayit}) {
+  const [yapilacak,yaz]=useState("")
+  const [tarih,sec]=useState()
   const todo = {
-    id:"",
-    yapilcak:"gfd",
-    tarih:date.toLocaleDateString(),
-    check:false
+    id: veri.length+1,
+    yapilacak: yapilacak,
+    tarih: tarih,
+    check: false,
+    
   };
+  function tarihSec(e){
+    const trh=new Date(e.target.value)
+    sec(trh.toDateString())
+  }
+  function yapilacakYaz(e){
+
+    yaz(e.target.value)
+  }
+  function ekl(e){
+    console.log(veri)
+    kayit(todo)
+    
+  }
   
-  const yazdir = () => console.log(todo.tarih + " " + todo.yapilcak);
+
+
+
   return (
-    <div>
-      <input
-        type="datetime-local"
-        onChange={(e) => tdate(e,todo)}
-      />
-      <input type="text" onChange={(e) => tcont(e,todo)} />
-      
-      <button onClick={tekle(props.veri,todo)}>bozuldu</button>
+    <div className="Ekle">
+      <input type="date" onChange={tarihSec}/>
+      <input type="text" onChange={yapilacakYaz}/>
+
+      <button onClick={ekl}>bozuldu</button>
+      <div>
+        {todo.tarih}
+      </div>
     </div>
   );
 }
 
-function tekle(vtb,td){
-  td.id=vtb.length+1;
-  vtb.push(td);
-}
-function tdate(e,td){
-  td.tarih=e.target.value;
-}
-function tcont(e,td){
-  td.yapilcak=e.target.value;
-
-}
 export default Ekle;

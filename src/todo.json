@@ -1,43 +1,43 @@
 [
   {
     "id": 1,
-    "tarih": "01.05.2022",
+    "tarih": "Wed Jan 05 2022",
     "yapilacak": "görüşme",
     "check": false
   },
   {
     "id": 2,
-    "tarih": "01.05.2022",
+    "tarih": "Thu Jan 13 2022",
     "yapilacak": "doktor",
     "check": false
   },
   {
     "id": 3,
-    "tarih": "03.05.2022",
+    "tarih": "Wed Feb 09 2022",
     "yapilacak": "temizlik",
     "check": false
   },
   {
     "id": 4,
-    "tarih": "04.05.2022",
+    "tarih": "Sat Jan 08 2022",
     "yapilacak": "yemek",
     "check": false
   },
   {
     "id": 5,
-    "tarih": "01.05.2022",
+    "tarih": "Sat Nov 05 2022",
     "yapilacak": "kodla",
     "check": false
   },
   {
     "id": 6,
-    "tarih": "11.05.2022",
+    "tarih": "Wed Jan 05 2022",
     "yapilacak": "alış-veriş",
     "check": false
   },
   {
     "id": 7,
-    "tarih": "06.05.2022",
+    "tarih": "Wed Jan 05 2022",
     "yapilacak": "doğum günü",
     "check": false
   }
