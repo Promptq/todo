@@ -1,5 +1,15 @@
 .Ekle{
     display: block;
     width: fit-content;
-    color: aqua;
+    color: white;
+}
+.icerik{
+    margin: 8px;
+    padding: 8px;
+    display: flex;
+    background-color:aquamarine;
+    justify-content: space-around;
+}
+.ana{
+    background-color: cadetblue;
 }
