@@ -5,7 +5,7 @@ import Ekle from "./ekleme";
 export default function App() {
   const date = new Date();
   const dat = require("./todo.json");
-  const [ekran, setEkran] = useState(false);
+  const [ekran, setEkran] = useState(true);
   const bos = new Date(2022, 11, 1);
   const [todoss, setTodos] = useState(dat);
   const scrn = (yeni) => {
@@ -18,7 +18,7 @@ export default function App() {
     todoss[a].check=!todoss[a].check
     
     
-    //console.log(todoss);
+    console.log(todoss[todoss.length-1]);
   };
 
   const todos = <Tarihler veri={todoss} islem={islem} />;
@@ -34,7 +34,7 @@ export default function App() {
       </div>
 
       <div className="card">
-        <button onClick={()=>setEkran(!ekran)}>xcxcx</button>
+        <button onClick={()=>setEkran(!ekran)}>{ekran ? "ekle":"anasayfa"}</button>
         {ekran ? todos : addition}
       </div>
     </div>

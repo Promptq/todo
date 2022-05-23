@@ -8,35 +8,57 @@ function Aytem({ veri, islem }) {
     setSt(!yapildiMi);
     islem(veri);
   };
-  console.log(veri.alt)
+  const alt = [];
+  const [genislet, setGenisle] = useState(false);
+  if (veri.alt !== undefined) {
+    veri.alt.forEach((element) => {
+      alt.push(<Alt altVeri={element} />);
+      
+    });
+    var a=document.getElementsByClassName("alt")
+    console.log(a)
+  }
   return (
     <div className="aytem">
-      <div className="cbp">
-        <input
-          className="cBox"
-          type="checkbox"
-          value={yapildiMi}
-          defaultChecked={yapildiMi}
-          onChange={checked}
-        ></input>
-        
-        <h4
-          className="yazi"
-          style={{ textDecoration: yapildiMi ? "line-through" : "none" }}
-        >
-          {todo} {yapildiMi && "yapıldı"}
-        </h4>
+      <div className="dis">
+        <div className="cbp">
+          <input
+            className="cBox"
+            type="checkbox"
+            value={yapildiMi}
+            defaultChecked={yapildiMi}
+            onChange={checked}
+          ></input>
+
+          <h4
+            className="yazi"
+            style={{ textDecoration: yapildiMi ? "line-through" : "none" }}
+          >
+            {todo} {yapildiMi && "yapıldı"}
+          </h4>
+        </div>
+        {alt.length>0?<button
+          className="btn"
+          onClick={() => {
+            setGenisle(!genislet);
+          }}
+        ></button>:null}
       </div>
-      <button
-        className="btn"
-        onClick={() => {
-          alert("vxcvxc");
-        }}
-      ></button>
-      
+      <div className="alt" style={{ display: genislet ? "block" : "none" }}>
+        {alt}
+      </div>
     </div>
   );
 }
+
+function Alt(props) {
+  return (
+    <div className="altItem">
+      <p>{props.altVeri.yapilacak}</p>
+    </div>
+  );
+}
+
 function tarih(gelen, fonskiyon) {
   //todo'lardaki tarihlerin unique listesi
   const unq = gelen
