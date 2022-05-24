@@ -7,6 +7,10 @@
       {
         "yapilacak":"bro",
         "check":false
+      },
+      {
+        "yapilacak":"bruh",
+        "check":false
       }
     ],
     "check": false

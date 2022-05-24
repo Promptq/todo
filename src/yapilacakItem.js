@@ -1,7 +1,7 @@
 import "./aytem.css";
 import React, { useState } from "react";
 
-function Aytem({ veri, islem }) {
+function Aytem({ veri, islem, altIslem }) {
   const todo = veri.yapilacak;
   const [yapildiMi, setSt] = useState(veri.check);
   const checked = (e) => {
@@ -12,11 +12,10 @@ function Aytem({ veri, islem }) {
   const [genislet, setGenisle] = useState(false);
   if (veri.alt !== undefined) {
     veri.alt.forEach((element) => {
-      alt.push(<Alt altVeri={element} />);
+      alt.push(<Alt veri={veri} altVeri={element} fonk={altIslem}/>);
       
     });
-    var a=document.getElementsByClassName("alt")
-    console.log(a)
+    
   }
   return (
     <div className="aytem">
@@ -52,14 +51,18 @@ function Aytem({ veri, islem }) {
 }
 
 function Alt(props) {
+  const b=()=>{
+    props.fonk(props.veri,props.altVeri)
+  }
   return (
     <div className="altItem">
+      <input type="checkbox" onChange={b} defaultChecked={props.altVeri.check}></input>
       <p>{props.altVeri.yapilacak}</p>
     </div>
   );
 }
 
-function tarih(gelen, fonskiyon) {
+function tarih(gelen, fonskiyon,altIslem) {
   //todo'lardaki tarihlerin unique listesi
   const unq = gelen
     .map((a) => a.tarih)
@@ -70,7 +73,7 @@ function tarih(gelen, fonskiyon) {
   unq.forEach((element) => {
     const gun = gelen
       .filter((e) => e.tarih === element)
-      .map((el) => <Aytem veri={el} islem={fonskiyon} />);
+      .map((el) => <Aytem veri={el} islem={fonskiyon} altIslem={altIslem}/>);
     mp.push(
       <div className="gun">
         <div>{new Date(element).toLocaleDateString()}</div>
@@ -81,9 +84,9 @@ function tarih(gelen, fonskiyon) {
   return mp;
 }
 
-function Tarihler({ veri, islem }) {
+function Tarihler({ veri, islem,altIslem }) {
   //state aktarma uğraşı
-  const trhList = tarih(veri, islem);
+  const trhList = tarih(veri, islem,altIslem);
   // const gunlukYapilcak = props.yapilcaklar;
   return <div>{trhList}</div>;
 }

@@ -59,7 +59,7 @@ function Ekle({ veri, kayit }) {
       <input type="date" onChange={tarihSec} />
       <input type="text" onChange={yapilacakYaz} />
 
-      <button onClick={ekl}>bozuldu</button>
+      <button onClick={ekl}>ekle</button>
       <div>
         <div className="ana">
           <div className="icerik">

@@ -6,7 +6,6 @@ export default function App() {
   const date = new Date();
   const dat = require("./todo.json");
   const [ekran, setEkran] = useState(true);
-  const bos = new Date(2022, 11, 1);
   const [todoss, setTodos] = useState(dat);
   const scrn = (yeni) => {
     setEkran(!ekran);
@@ -14,27 +13,29 @@ export default function App() {
     console.log("yarram2");
   };
   const islem = (veri) => {
-    let a= todoss.findIndex((e) => (e === veri));
-    todoss[a].check=!todoss[a].check
-    
-    
-    console.log(todoss[todoss.length-1]);
-  };
+    let a = todoss.findIndex((e) => e === veri);
+    todoss[a].check = !todoss[a].check;
 
-  const todos = <Tarihler veri={todoss} islem={islem} />;
+  
+  };
+  const islemAlt = (parent, child) => {
+    let a = todoss.findIndex((e) => e === parent);
+    let b = todoss[a].alt.findIndex((e) => e === child);
+    console.log(todoss[a].alt)
+    todoss[a].alt[b].check = !todoss[a].alt[b].check;
+  };
+  const todos = <Tarihler veri={todoss} islem={islem} altIslem={islemAlt} />;
   const addition = <Ekle veri={todoss} ekran={ekran} kayit={scrn} />;
   return (
     <div className="App">
       <div className="tarih">
-        <div>
-          {date.toLocaleDateString()}
-          <br />
-          {bos.toLocaleDateString()}
-        </div>
+        <div>{date.toLocaleDateString()}</div>
       </div>
 
       <div className="card">
-        <button onClick={()=>setEkran(!ekran)}>{ekran ? "ekle":"anasayfa"}</button>
+        <button onClick={() => setEkran(!ekran)}>
+          {ekran ? "ekle" : "anasayfa"}
+        </button>
         {ekran ? todos : addition}
       </div>
     </div>
