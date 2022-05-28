@@ -5,11 +5,11 @@
   grid-template-rows: auto auto;
 }
 .tarih {
-  background-color: yellow;
+  background-color: #1c768167;
   
   position: sticky;
   top: 0;
-  border: 2px solid #fc0;
+  border: 1px solid rgba(173, 181, 255, 0.151);
   border-radius: 0px 0px 12px 12px;
 }
 .card {
@@ -17,12 +17,11 @@
   padding: 8px;
   min-width: 280px;
   height: fit-content;
-  border: 6px solid #999;
   border-radius: 12px;
-  background: #555;
+  background: #eee;
   flex-shrink: 0;
   flex-direction: column;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Verdana, Tahoma, sans-serif;
   font-weight: bold;
-  color: white;
+  color: black;
 }

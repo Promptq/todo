@@ -10,7 +10,7 @@ export default function App() {
   const scrn = (yeni) => {
     setEkran(!ekran);
     if (yeni.yapilacak !== "") setTodos([...todoss, yeni]);
-    console.log("yarram2");
+    console.log(todoss);
   };
   const islem = (veri) => {
     let a = todoss.findIndex((e) => e === veri);
@@ -25,7 +25,7 @@ export default function App() {
     todoss[a].alt[b].check = !todoss[a].alt[b].check;
   };
   const todos = <Tarihler veri={todoss} islem={islem} altIslem={islemAlt} />;
-  const addition = <Ekle veri={todoss} ekran={ekran} kayit={scrn} />;
+  const ekle = <Ekle veri={todoss} ekran={ekran} kayit={scrn} />;
   return (
     <div className="App">
       <div className="tarih">
@@ -34,9 +34,9 @@ export default function App() {
 
       <div className="card">
         <button onClick={() => setEkran(!ekran)}>
-          {ekran ? "ekle" : "anasayfa"}
+          {ekran ? "Ekle" : "anasayfa"}
         </button>
-        {ekran ? todos : addition}
+        {ekran ? todos : ekle}
       </div>
     </div>
   );

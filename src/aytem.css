@@ -1,10 +1,14 @@
 .aytem {
-  border: 4px solid #444;
-  margin-top: 4px;
+  border:2px solid rgb(51, 43, 43);
+  margin: 4px;
   justify-content: space-between;
   padding: 4px 16px;
   display: flex;
   flex-direction: column;
+}
+h4{
+  word-wrap: break-word;
+  
 }
 .dis{
   display: flex;
@@ -28,16 +32,26 @@
 
 }
 .altItem{
-  border: 1px solid #444;
+  border: solid #555;
+  border-width: 0 0 1px 0;
   display: flex;
+  background-color: #dddddd66;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   padding: 0 8px;
+}
+.butonlar{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  
 }
 
 .btn {
-  border: 2px solid #ffffff11;
-  border-radius: 20%;
+  border: 2px solid #555;
+  border-radius: 4px;
   background-color: transparent;
   width: min-content;
   height: min-content;
@@ -46,15 +60,15 @@
 }
 .btn:hover {
   cursor: pointer;
-  border-color: #ffffffff;
+  border-color: #aaa;
 }
 
 .btn:after {
-  content: "\22EE";
-  padding: 4px 4px;
+  content: "v";
+  padding: 2px;
   font-size: 16px;
   text-align: center;
   display: inline-block;
-  color: #fff;
+  color: #222;
   background-color: transparent;
 }
