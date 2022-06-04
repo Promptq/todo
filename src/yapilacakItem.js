@@ -1,7 +1,7 @@
 import "./aytem.css";
 import React, { useState } from "react";
 
-function Aytem({ veri, islem, altIslem }) {
+function Aytem({ veri, islem, altIslem,sil }) {
   const todo = veri.yapilacak;
   const [yapildiMi, setSt] = useState(veri.check);
   const checked = (e) => {
@@ -33,12 +33,13 @@ function Aytem({ veri, islem, altIslem }) {
                 className="yazi"
                 style={{ textDecoration: yapildiMi ? "line-through" : "none" }}
               >
-                {todo} {yapildiMi && "yapıldı"}
+                {todo} 
               </h4>
             ) : (
               <input
                 type="text"
                 defaultValue={todo}
+                autoFocus="true"
                 onKeyUp={(e) => {
                   veri.yapilacak = e.target.value;
                   if (e.key === "Enter") setEdit(!edit);
@@ -55,14 +56,17 @@ function Aytem({ veri, islem, altIslem }) {
           >
             Edit
           </button>
-          {alt.length > 0 ? (
-            <button
-              className="btn"
-              onClick={() => {
-                setGenisle(!genislet);
-              }}
-            ></button>
-          ) : null}
+          <div>
+            <button className="btn" onClick={(e)=>{console.log(e.relatedTarget);sil(veri)}}>Sil</button>
+            {alt.length > 0 ? (
+              <button
+                className="btn"
+                onClick={() => {
+                  setGenisle(!genislet);
+                }}
+              >v</button>
+            ) : null}
+          </div>
         </div>
       </div>
       <div className="alt" style={{ display: genislet ? "none" : "block" }}>
@@ -73,10 +77,13 @@ function Aytem({ veri, islem, altIslem }) {
 }
 
 function Alt(props) {
+  const [chc,setChc]=useState(props.altVeri.check)
   const b = () => {
     props.fonk(props.veri, props.altVeri);
+    setChc(!chc)
   };
-  const [edit,setEdit]=useState(true)
+  const [edit, setEdit] = useState(true);
+
   return (
     <div className="altItem">
       <div className="cbp">
@@ -85,26 +92,42 @@ function Alt(props) {
           onChange={b}
           defaultChecked={props.altVeri.check}
         ></input>
-        {edit?<p>{props.altVeri.yapilacak}</p>:<input onKeyUp={(e)=>{if(e.key==="Enter"){props.altVeri.yapilacak=e.target.value;setEdit(!edit)}}}></input>}
-        
+        {edit ? (
+          <p style={{textDecoration:chc?"line-through":"none"}}>{props.altVeri.yapilacak}</p>
+        ) : (
+          <input
+            id="in"
+            onKeyUp={(e) => {
+              if (e.key === "Enter") {
+                props.altVeri.yapilacak = e.target.value;
+                setEdit(!edit);
+              }
+            }}
+          ></input>
+        )}
       </div>
-      <button onClick={()=>{setEdit(!edit)}}>Edit</button>
+      <button
+        onClick={() => {
+          setEdit(!edit);
+        }}
+      >
+        Edit
+      </button>
     </div>
   );
 }
 
-function tarih(gelen, fonskiyon, altIslem) {
-  //todo'lardaki tarihlerin unique listesi
-  const unq = gelen
+function Tarihler({ veri, islem, altIslem,sil }) {
+  const unq = veri
     .map((a) => a.tarih)
     .filter((value, index, array) => array.indexOf(value) === index)
     .sort((a, b) => new Date(a) - new Date(b));
   //console.log(unq)
   const mp = [];
   unq.forEach((element) => {
-    const gun = gelen
+    const gun = veri
       .filter((e) => e.tarih === element)
-      .map((el) => <Aytem veri={el} islem={fonskiyon} altIslem={altIslem} />);
+      .map((el) => <Aytem veri={el} islem={islem} altIslem={altIslem} sil={sil}/>);
     mp.push(
       <div className="gun">
         <div>{new Date(element).toLocaleDateString()}</div>
@@ -112,12 +135,8 @@ function tarih(gelen, fonskiyon, altIslem) {
       </div>
     );
   });
-  return mp;
-}
-
-function Tarihler({ veri, islem, altIslem }) {
-  const trhList = tarih(veri, islem, altIslem);
-  return <div>{trhList}</div>;
+  
+  return <div>{mp}</div>;
 }
 
 export { Aytem, Tarihler };

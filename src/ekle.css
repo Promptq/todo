@@ -1,15 +1,35 @@
 .Ekle{
     display: block;
-    width: fit-content;
-    color: white;
+    width: inherit;
+    background-color:whitesmoke ;
 }
 .icerik{
     margin: 8px;
     padding: 8px;
     display: flex;
-    background-color:aquamarine;
+    background-color:whitesmoke;
     justify-content: space-around;
 }
 .ana{
-    background-color: cadetblue;
+    background-color: whitesmoke;
+}
+
+.alt{
+    border: 2px solid white;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+}
+.items{
+    border: 1px solid black;
+    display: grid;
+    margin: 2px;
+    grid-template-columns: 10% 90%;
+    word-break:break-all;
+    word-wrap: break-word;
+    justify-content: left;
+}
+p{
+    text-align: left;
 }

@@ -2,10 +2,10 @@ import { useState } from "react";
 import "./styles.css";
 import { Tarihler } from "./yapilacakItem";
 import Ekle from "./ekleme";
-export default function App() {
+function App() {
   const date = new Date();
   const dat = require("./todo.json");
-  const [ekran, setEkran] = useState(true);
+  const [ekran, setEkran] = useState(false);
   const [todoss, setTodos] = useState(dat);
   const scrn = (yeni) => {
     setEkran(!ekran);
@@ -15,16 +15,20 @@ export default function App() {
   const islem = (veri) => {
     let a = todoss.findIndex((e) => e === veri);
     todoss[a].check = !todoss[a].check;
-
-  
   };
+  function sil(silinecek) {
+    if(window.confirm("Emin misin?"))setTodos(e=>e.filter(el=>el!==silinecek))
+    
+  }
   const islemAlt = (parent, child) => {
-    let a = todoss.findIndex((e) => e === parent);
-    let b = todoss[a].alt.findIndex((e) => e === child);
-    console.log(todoss[a].alt)
+    const a = todoss.findIndex((e) => e === parent);
+    const b = todoss[a].alt.findIndex((e) => e === child);
+    console.log(todoss[a].alt);
     todoss[a].alt[b].check = !todoss[a].alt[b].check;
   };
-  const todos = <Tarihler veri={todoss} islem={islem} altIslem={islemAlt} />;
+  const todos = (
+    <Tarihler veri={todoss} islem={islem} altIslem={islemAlt} sil={sil} />
+  );
   const ekle = <Ekle veri={todoss} ekran={ekran} kayit={scrn} />;
   return (
     <div className="App">
@@ -41,4 +45,6 @@ export default function App() {
     </div>
   );
 }
+
+export { App };
 //{dat.map((e) => <Aytem veri={e}/>)}

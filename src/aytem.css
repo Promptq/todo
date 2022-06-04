@@ -1,5 +1,5 @@
 .aytem {
-  border:2px solid rgb(51, 43, 43);
+  border:1px solid rgb(51, 43, 43);
   margin: 4px;
   justify-content: space-between;
   padding: 4px 16px;
@@ -50,25 +50,18 @@ h4{
 }
 
 .btn {
-  border: 2px solid #555;
+  border: 2px solid #bbb;
   border-radius: 4px;
   background-color: transparent;
   width: min-content;
   height: min-content;
+  user-select: none;
   
   transition: border-color 0.5s;
 }
 .btn:hover {
   cursor: pointer;
-  border-color: #aaa;
+  border-color: #222;
 }
 
-.btn:after {
-  content: "v";
-  padding: 2px;
-  font-size: 16px;
-  text-align: center;
-  display: inline-block;
-  color: #222;
-  background-color: transparent;
-}
+

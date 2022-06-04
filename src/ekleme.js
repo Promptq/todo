@@ -5,7 +5,7 @@ function Ekle({ veri, kayit }) {
   const [yapilacak, yaz] = useState("");
   const [tarih, sec] = useState();
   const [altItems, setAlt] = useState([]);
-  const [altComp, setAltComp] = useState([]);
+
   const todo = {
     id: veri.length + 1,
     yapilacak: yapilacak,
@@ -14,8 +14,6 @@ function Ekle({ veri, kayit }) {
     check: false,
   };
 
-  
-  
   function tarihSec(e) {
     const trh = new Date(e.target.value);
     sec(trh.toDateString());
@@ -24,71 +22,61 @@ function Ekle({ veri, kayit }) {
     yaz(e.target.value);
   }
   function ekl() {
-    //console.log(veri)
+    console.log(todo);
     kayit(todo);
   }
-  const altItem = {
-    yapilacak: yapilacak,
-    check: false,
-  };
-  function altEkle() {
-    altItems.push(altItem);
-    setAlt([...altItems]);
-  }
-  function cikar() {
-    altItems.pop();
-    altComp.pop();
-    setAlt([...altItems]);
-  }
-  function altTani(id, yapil) {
-    altItems[id].yapilacak = yapil;
-    console.log(altItems);
-    todo.alt=altItems;
-    console.log(todo);
-    console.log(altItems);
-  }
-  function olustur() {
-    altEkle();
-    altItems.forEach((elem) =>
-      setAltComp([...altComp, <Alt id={altComp.length} fonk={altTani} />])
-    );
+  function sil(sili) {
+    setAlt((e) => e.filter((ele) => ele !== sili));
   }
 
   return (
     <div className="Ekle">
-      <input type="date" onChange={tarihSec} />
+      <input type="date" onChange={tarihSec} onKeyUp={(e)=>{}}/>
       <input type="text" onChange={yapilacakYaz} />
 
       <button onClick={ekl}>ekle</button>
       <div>
         <div className="ana">
-          <div className="icerik">
-            {todo.yapilacak} <button onClick={olustur}>alt ekle</button>
-            <button onClick={cikar}>cikar</button>
+          <div className="icerik">{todo.yapilacak}</div>
+          <Alt veri={[altItems, setAlt]} />
+          <div className="alt">
+            {altItems.map((e) => (
+              <div className="items">
+                <button
+                  onClick={() => {
+                    sil(e);
+                  }} style={{width:"48px"}}
+                >
+                  Sil
+                </button>
+                <p>{e.yapilacak}</p>
+              </div>
+            ))}
           </div>
-          <div>{altComp}</div>
         </div>
       </div>
     </div>
   );
 }
-function Alt(props) {
+function Alt({ veri }) {
   const [yapilacak, syap] = useState("");
-
+  const altItem = {
+    yapilacak: yapilacak,
+    check: false,
+  };
   const c = (e) => {
     syap(e.target.value);
   };
-  function b() {
-    props.fonk(props.id, yapilacak);
-  }
+
   return (
     <div>
-      {props.id}
-      <button onClick={b}>x</button>
       <input
         onChange={c}
         onKeyDown={(e) => {
-          if (e.key === "Enter") b();
+          if (e.key === "Enter" && e.target.value !== "") {
+            veri[1]([...veri[0], altItem]);
+            console.log(veri[0]);
+          }
         }}
       ></input>
     </div>
