@@ -1,19 +1,21 @@
 import "./aytem.css";
 import React, { useState } from "react";
 
-function Aytem({ veri, islem, altIslem, sil }) {
+function Todo({ veri, check, parcaCheck, sil }) {
   const todo = veri.yapilacak;
   const [yapildiMi, setSt] = useState(veri.check);
-  const altt = veri.alt;
+  const parcalar = veri.parca;
   const checked = (e) => {
     setSt(!yapildiMi);
-    islem(veri);
+    check(veri);
   };
-  const alt = [];
+  const parcaListesi = [];
   const [genislet, setGenisle] = useState(true);
-  if (veri.alt !== undefined) {
-    altt.forEach((element) => {
-      alt.push(<Alt veri={veri} altVeri={element} fonk={altIslem} sil={sil} />);
+  if (veri.parca !== undefined) {
+    parcalar.forEach((element) => {
+      parcaListesi.push(
+        <Parca parent={veri} parca={element} check={parcaCheck} />
+      );
     });
   }
   const [edit, setEdit] = useState(true);
@@ -39,10 +41,12 @@ function Aytem({ veri, islem, altIslem, sil }) {
               <input
                 type="text"
                 defaultValue={todo}
-                autoFocus="true"
+                autoFocus={true}
                 onKeyUp={(e) => {
                   veri.yapilacak = e.target.value;
-                  if (e.key === "Enter") setEdit(!edit);
+                  if (e.key === "Enter") {
+                    if (e.target.value !== "") setEdit(!edit);
+                  }
                 }}
               ></input>
             )}
@@ -61,12 +65,12 @@ function Aytem({ veri, islem, altIslem, sil }) {
               className="btn"
               onClick={(e) => {
                 console.log(e.target.value);
-                sil(veri, "ust");
+                sil(veri);
               }}
             >
               Sil
             </button>
-            {alt.length > 0 ? (
+            {parcaListesi.length > 0 ? (
               <button
                 className="btn"
                 onClick={() => {
@@ -80,39 +84,36 @@ function Aytem({ veri, islem, altIslem, sil }) {
         </div>
       </div>
       <div className="alt" style={{ display: genislet ? "none" : "block" }}>
-        {alt}
+        {parcaListesi}
       </div>
     </div>
   );
 }
 
-function Alt(props) {
-  const [chc, setChc] = useState(props.altVeri.check);
+function Parca({ parent, parca, check }) {
+  const [check1, setCheck] = useState(parca.check);
 
   const b = () => {
-    props.fonk(props.veri, props.altVeri);
-    setChc(!chc);
+    check(parent, parca);
+    setCheck(!check);
   };
   const [edit, setEdit] = useState(true);
 
   return (
-    <div className="altItem">
+    <div className="parca">
       <div className="cbp">
-        <input
-          type="checkbox"
-          onChange={b}
-          defaultChecked={props.altVeri.check}
-        ></input>
+        <input type="checkbox" onChange={b} defaultChecked={check1}></input>
         {edit ? (
-          <p style={{ textDecoration: chc ? "line-through" : "none" }}>
-            {props.altVeri.yapilacak}
+          <p style={{ textDecoration: check1 ? "line-through" : "none" }}>
+            {parca.yapilacak}
           </p>
         ) : (
           <input
-            id="in"
+            autoFocus={true}
+            defaultValue={parca.yapilacak}
             onKeyUp={(e) => {
               console.log(e.target.value);
-              props.altVeri.yapilacak = e.target.value;
+              parca.yapilacak = e.target.value;
               if (e.key === "Enter") {
                 if (e.target.value !== "") setEdit(!edit);
               }
@@ -120,7 +121,7 @@ function Alt(props) {
           ></input>
         )}
       </div>
-      <div style={{ display: "flex", flexDirection: "column" }}>
+      <div>
         <button
           onClick={() => {
             setEdit(!edit);
@@ -132,34 +133,49 @@ function Alt(props) {
     </div>
   );
 }
-
-function Tarihler({ veri, islem, altIslem, sil }) {
-  const unq = veri
-    .map((a) => a.tarih)
-    .filter((value, index, array) => array.indexOf(value) === index)
-    .sort((a, b) => new Date(a) - new Date(b));
-  //console.log(unq)
-  const mp = [];
-  unq.forEach((element) => {
-    const gun = veri
-      .filter((e) => e.tarih === element)
-      .map((el) => (
-        <Aytem veri={el} islem={islem} altIslem={altIslem} sil={sil} />
-      ));
-    mp.push(<Gun tarih={element} icerik={gun} />);
-  });
-  function Gun({ tarih, icerik }) {
-    const deneme = new Date(tarih).toLocaleDateString();
-    const bgnMu = new Date(Date.now()).toLocaleDateString() === deneme;
+function Gun({ tarih, icerik }) {
+    const trh = new Date(tarih);
+    const bugun = new Date(Date.now());
+    const bgnMu = trh.toLocaleDateString() === bugun.toLocaleDateString();
+    const fark = Math.ceil((trh - bugun) / (1000 * 60 * 60 * 24));
+    var yazz = "Bugün";
+    if (fark > 0) {
+      yazz = " Gün Sonra";
+    } else if (fark < 0) {
+      yazz = " Gün Önce";
+    }
+    const valid = trh.toDateString() !== "Invalid Date" ? true : false;
 
     return (
       <div className={bgnMu ? "bugun" : "gun"}>
-        <div>{deneme !== "Invalid Date" ? deneme : null}</div>
+        <div className="div">
+          {valid ? (
+            <>
+              <div>{trh.toLocaleDateString()}</div>
+              <div>{fark !== 0 ? Math.abs(fark) + yazz : yazz}</div>
+            </>
+          ) : null}
+        </div>
         <div className="isler">{icerik}</div>
       </div>
     );
   }
+function Tarihler({ veri, check, parcaCheck, sil }) {
+  const uniqueTarih = veri
+    .map((a) => a.tarih)
+    .filter((value, index, array) => array.indexOf(value) === index)
+    .sort((a, b) => new Date(a) - new Date(b));
+  const mp = [];
+  uniqueTarih.forEach((element) => {
+    const gun = veri
+      .filter((e) => e.tarih === element)
+      .map((el) => (
+        <Todo veri={el} check={check} parcaCheck={parcaCheck} sil={sil} />
+      ));
+    mp.push(<Gun tarih={element} icerik={gun} />);
+  });
+  
   return <div>{mp}</div>;
 }
 
-export { Aytem, Tarihler };
+export { Tarihler };

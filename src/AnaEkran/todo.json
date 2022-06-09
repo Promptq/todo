@@ -2,53 +2,42 @@
   {
     
     "tarih": "Wed Jan 05 2022",
-    "yapilacak": "görüşme",
-    "alt":[
+    "yapilacak": "alış-veriş",
+    "parca":[
       {
-        "yapilacak":"bro",
-        "check":false
+        "yapilacak":"Hediye",
+        "check":true
       },
       {
-        "yapilacak":"bruh",
-        "check":false
+        "yapilacak":"Pasta",
+        "check":true
       }
     ],
-    "check": false
+    "check": true
   },
   {
     
-    "tarih": "Thu Jan 13 2022",
+    "tarih": "Fri May 13 2022",
     "yapilacak": "doktor",
+    "check": true
+  },
+  {
+    
+    "tarih": "Thu Jun 09 2022",
+    "yapilacak": "Sınav",
     "check": false
   },
   {
     
-    "tarih": "Wed Feb 09 2022",
-    "yapilacak": "temizlik",
+    "tarih": "Mon Jul 18 2022",
+    "yapilacak": "Staj",
     "check": false
   },
-  {
-    
-    "tarih": "Sat Jan 08 2022",
-    "yapilacak": "yemek",
-    "check": false
-  },
-  {
-    
-    "tarih": "Sat Nov 05 2022",
-    "yapilacak": "kodla",
-    "check": false
-  },
-  {
-    
-    "tarih": "Wed Jan 05 2022",
-    "yapilacak": "alış-veriş",
-    "check": false
-  },
+  
   {
     
     "tarih": "Wed Jan 05 2022",
     "yapilacak": "doğum günü",
-    "check": false
+    "check": true
   }
 ]
