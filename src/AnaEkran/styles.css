@@ -16,6 +16,8 @@
   display: flex;
   padding: 8px;
   min-width: 280px;
+  word-wrap: break-word;
+  word-break: break-all;
   height: fit-content;
   border-radius: 12px;
   background: #eee;

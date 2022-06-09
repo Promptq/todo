@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    
     "tarih": "Wed Jan 05 2022",
     "yapilacak": "görüşme",
     "alt":[
@@ -16,37 +16,37 @@
     "check": false
   },
   {
-    "id": 2,
+    
     "tarih": "Thu Jan 13 2022",
     "yapilacak": "doktor",
     "check": false
   },
   {
-    "id": 3,
+    
     "tarih": "Wed Feb 09 2022",
     "yapilacak": "temizlik",
     "check": false
   },
   {
-    "id": 4,
+    
     "tarih": "Sat Jan 08 2022",
     "yapilacak": "yemek",
     "check": false
   },
   {
-    "id": 5,
+    
     "tarih": "Sat Nov 05 2022",
     "yapilacak": "kodla",
     "check": false
   },
   {
-    "id": 6,
+    
     "tarih": "Wed Jan 05 2022",
     "yapilacak": "alış-veriş",
     "check": false
   },
   {
-    "id": 7,
+    
     "tarih": "Wed Jan 05 2022",
     "yapilacak": "doğum günü",
     "check": false

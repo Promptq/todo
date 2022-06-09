@@ -7,7 +7,7 @@
   flex-direction: column;
 }
 h4{
-  word-wrap: break-word;
+  word-break: break-all;
   
 }
 .dis{
@@ -24,11 +24,22 @@ h4{
   align-items: center;
   
 }
+.bugun {
+  display: grid;
+  grid-template-columns: 20% 80%;
+  border: 2px solid;
+  margin: 4px 0px;
+  align-items: center;
+  background-color: #1c768167;
+  
+}
 .cbp{
   
   display: flex;
   flex-direction: row;
   align-items: center;
+  max-width: 80%;
+  padding: 1%;
 
 }
 .altItem{
@@ -47,21 +58,9 @@ h4{
   align-items: center;
   gap: 3px;
   
+  
 }
 
-.btn {
-  border: 2px solid #bbb;
-  border-radius: 4px;
-  background-color: transparent;
-  width: min-content;
-  height: min-content;
-  user-select: none;
-  
-  transition: border-color 0.5s;
-}
-.btn:hover {
-  cursor: pointer;
-  border-color: #222;
-}
+
 
 

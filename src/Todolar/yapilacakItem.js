@@ -1,9 +1,10 @@
 import "./aytem.css";
 import React, { useState } from "react";
 
-function Aytem({ veri, islem, altIslem,sil }) {
+function Aytem({ veri, islem, altIslem, sil }) {
   const todo = veri.yapilacak;
   const [yapildiMi, setSt] = useState(veri.check);
+  const altt = veri.alt;
   const checked = (e) => {
     setSt(!yapildiMi);
     islem(veri);
@@ -11,8 +12,8 @@ function Aytem({ veri, islem, altIslem,sil }) {
   const alt = [];
   const [genislet, setGenisle] = useState(true);
   if (veri.alt !== undefined) {
-    veri.alt.forEach((element) => {
-      alt.push(<Alt veri={veri} altVeri={element} fonk={altIslem} />);
+    altt.forEach((element) => {
+      alt.push(<Alt veri={veri} altVeri={element} fonk={altIslem} sil={sil} />);
     });
   }
   const [edit, setEdit] = useState(true);
@@ -27,13 +28,12 @@ function Aytem({ veri, islem, altIslem,sil }) {
             defaultChecked={yapildiMi}
             onChange={checked}
           ></input>
-          <div>
+          <div className="yazi">
             {edit ? (
               <h4
-                className="yazi"
                 style={{ textDecoration: yapildiMi ? "line-through" : "none" }}
               >
-                {todo} 
+                {todo}
               </h4>
             ) : (
               <input
@@ -57,14 +57,24 @@ function Aytem({ veri, islem, altIslem,sil }) {
             Edit
           </button>
           <div>
-            <button className="btn" onClick={(e)=>{console.log(e.relatedTarget);sil(veri)}}>Sil</button>
+            <button
+              className="btn"
+              onClick={(e) => {
+                console.log(e.target.value);
+                sil(veri, "ust");
+              }}
+            >
+              Sil
+            </button>
             {alt.length > 0 ? (
               <button
                 className="btn"
                 onClick={() => {
                   setGenisle(!genislet);
                 }}
-              >v</button>
+              >
+                v
+              </button>
             ) : null}
           </div>
         </div>
@@ -77,10 +87,11 @@ function Aytem({ veri, islem, altIslem,sil }) {
 }
 
 function Alt(props) {
-  const [chc,setChc]=useState(props.altVeri.check)
+  const [chc, setChc] = useState(props.altVeri.check);
+
   const b = () => {
     props.fonk(props.veri, props.altVeri);
-    setChc(!chc)
+    setChc(!chc);
   };
   const [edit, setEdit] = useState(true);
 
@@ -93,31 +104,36 @@ function Alt(props) {
           defaultChecked={props.altVeri.check}
         ></input>
         {edit ? (
-          <p style={{textDecoration:chc?"line-through":"none"}}>{props.altVeri.yapilacak}</p>
+          <p style={{ textDecoration: chc ? "line-through" : "none" }}>
+            {props.altVeri.yapilacak}
+          </p>
         ) : (
           <input
             id="in"
             onKeyUp={(e) => {
+              console.log(e.target.value);
+              props.altVeri.yapilacak = e.target.value;
               if (e.key === "Enter") {
-                props.altVeri.yapilacak = e.target.value;
-                setEdit(!edit);
+                if (e.target.value !== "") setEdit(!edit);
               }
             }}
           ></input>
         )}
       </div>
-      <button
-        onClick={() => {
-          setEdit(!edit);
-        }}
-      >
-        Edit
-      </button>
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <button
+          onClick={() => {
+            setEdit(!edit);
+          }}
+        >
+          Edit
+        </button>
+      </div>
     </div>
   );
 }
 
-function Tarihler({ veri, islem, altIslem,sil }) {
+function Tarihler({ veri, islem, altIslem, sil }) {
   const unq = veri
     .map((a) => a.tarih)
     .filter((value, index, array) => array.indexOf(value) === index)
@@ -127,15 +143,22 @@ function Tarihler({ veri, islem, altIslem,sil }) {
   unq.forEach((element) => {
     const gun = veri
       .filter((e) => e.tarih === element)
-      .map((el) => <Aytem veri={el} islem={islem} altIslem={altIslem} sil={sil}/>);
-    mp.push(
-      <div className="gun">
-        <div>{new Date(element).toLocaleDateString()}</div>
-        <div className="isler">{gun}</div>
+      .map((el) => (
+        <Aytem veri={el} islem={islem} altIslem={altIslem} sil={sil} />
+      ));
+    mp.push(<Gun tarih={element} icerik={gun} />);
+  });
+  function Gun({ tarih, icerik }) {
+    const deneme = new Date(tarih).toLocaleDateString();
+    const bgnMu = new Date(Date.now()).toLocaleDateString() === deneme;
+
+    return (
+      <div className={bgnMu ? "bugun" : "gun"}>
+        <div>{deneme !== "Invalid Date" ? deneme : null}</div>
+        <div className="isler">{icerik}</div>
       </div>
     );
-  });
-  
+  }
   return <div>{mp}</div>;
 }
 

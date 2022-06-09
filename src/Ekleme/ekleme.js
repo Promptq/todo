@@ -7,7 +7,7 @@ function Ekle({ veri, kayit }) {
   const [altItems, setAlt] = useState([]);
 
   const todo = {
-    id: veri.length + 1,
+    
     yapilacak: yapilacak,
     tarih: tarih,
     alt: altItems,
@@ -47,7 +47,7 @@ function Ekle({ veri, kayit }) {
                     sil(e);
                   }} style={{width:"48px"}}
                 >
-                  Sil
+                  X
                 </button>
                 <p>{e.yapilacak}</p>
               </div>
@@ -75,6 +75,7 @@ function Alt({ veri }) {
         onKeyDown={(e) => {
           if (e.key === "Enter" && e.target.value !== "") {
             veri[1]([...veri[0], altItem]);
+            e.target.value=""
             console.log(veri[0]);
           }
         }}

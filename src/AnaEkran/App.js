@@ -1,11 +1,11 @@
 import { useState } from "react";
 import "./styles.css";
-import { Tarihler } from "./yapilacakItem";
-import Ekle from "./ekleme";
+import { Tarihler } from "../Todolar/yapilacakItem";
+import Ekle from "../Ekleme/ekleme";
 function App() {
   const date = new Date();
   const dat = require("./todo.json");
-  const [ekran, setEkran] = useState(false);
+  const [ekran, setEkran] = useState(true);
   const [todoss, setTodos] = useState(dat);
   const scrn = (yeni) => {
     setEkran(!ekran);
@@ -47,4 +47,3 @@ function App() {
 }
 
 export { App };
-//{dat.map((e) => <Aytem veri={e}/>)}
